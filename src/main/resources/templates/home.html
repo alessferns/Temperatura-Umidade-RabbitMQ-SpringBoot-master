@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Home</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+<script type="text/javascript">
+	var stompClient;
+	
+	/* Chart Configuration */
+	var config = {
+		type : 'line',
+		data : {
+			labels : [],
+			datasets : [ {
+				label : 'Temperature',
+				backgroudColor : 'rgb(255, 99, 132)',
+				borderColor : 'rgb(255, 99, 132)',
+				data : [],
+				fill : false
+
+			} ]
+		},
+		options : {
+			responsive : true,
+			title : {
+				display : true,
+				text : 'Temperature'
+			},
+			tooltips : {
+				mode : 'index',
+				intersect : false
+			},
+			hover : {
+				mode : 'nearest',
+				intersect : true
+			},
+			scales : {
+				xAxes : [ {
+					display : true,
+					type : 'time',
+					time : {
+						displayFormats : {
+							quarter : 'h:mm:ss a'
+						}
+					},
+					scaleLabel : {
+						display : true,
+						labelString : 'Time'
+					}
+				} ],
+				yAxes : [ {
+					display : true,
+					scaleLabel : {
+						display : true,
+						labelString : 'Value'
+					}
+				} ]
+			}
+		}
+	};
+	
+	/* Document Ready Event */
+	$(document).ready(function() {
+		
+		var ctx = document.getElementById('lineChart').getContext('2d');
+		window.myLine = new Chart(ctx, config);
+		
+		/* Configuring WebSocket on Client Side */
+		var socket = new SockJS('/live-temperature');
+		stompClient = Stomp.over(socket);
+		stompClient.connect({}, function(frame) {
+			stompClient.subscribe('/topic/temperature', function(temperature) {
+				$('#temperature').text(temperature.body);
+				/* Push new data On X-Axis of Chart */
+				config.data.labels.push(new Date());
+				/* Push new data on Y-Axis of chart */
+				config.data.datasets.forEach(function(dataset) {
+					dataset.data.push(temperature.body);
+				});
+				window.myLine.update();
+			});
+		});
+
+	});
+</script>
+	<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-zv4m{border-color:#ffffff;text-align:left;vertical-align:top}
+.tg .tg-thfk{border-color:#ffffff;font-size:12px;text-align:left;vertical-align:top}
+</style>
+</head>
+<body>
+<form action="/" method="post">
+<div class="inputs" role="alert" style="...">
+	<table class="tg" align="center">
+		<thead>
+		<tr align="center">
+			<th class="tg-thfk">id_drone</th>
+			<th class="tg-zv4m">Latitude</th>
+			<th class="tg-zv4m">Longitude</th>
+			<th class="tg-zv4m">Temperatura</th>
+			<th class="tg-zv4m">Umidade</th>
+			<th class="tg-zv4m">Rastreamento</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr align="center">
+			<td class="tg-zv4m"><input type="text" id="drone" name="id_drone" size="10" required></td>
+			<td class="tg-zv4m"><input type="number" id="lati" name="latitude" step="10" value="0" min="-90" max="90" required></td>
+			<td class="tg-zv4m"><input type="number" id="long" name="longitude" step="10" value="0" min="-180" max="180" required></td>
+			<td class="tg-zv4m"><input type="number" id="temp" name="temperatura" step="5" value="0" min="-25" max="40" required></td>
+			<td class="tg-zv4m"><input type="number" id="umid" name="umidade" step="10" value="0" min="0" max="100" required></td>
+			<td class="tg-zv4m"><label><input type="checkbox" name="myCheckbox"> Ativar</label></td>
+		</tr>
+		</tbody>
+	</table>
+
+	<p id="dronev"></p>
+	<p id="lativ"></p>
+	<p id="longv"></p>
+	<p id="tempv"></p>
+	<p id="umidv"></p>
+
+	<div class="botao" role="alert" style="..." align="center">
+	<button type="submit" onclick="enviar()" name="myButton" autofocus>Inserir dados</button>
+	</div>
+</form>
+<script>
+   function enviar() {
+      var id_drone = document.getElementById('drone').value;
+      var latitude = document.getElementById('lati').value;
+      var longitude = document.getElementById('long').value;
+      var temperatura = document.getElementById('temp').value;
+      var umidade = document.getElementById('umid').value;
+      document.getElementById('dronev').innerHTML = id_drone;
+      document.getElementById('lativ').innerHTML = latitude;
+      document.getElementById('longv').innerHTML = longitude;
+      document.getElementById('tempv').innerHTML = temperatura;
+      document.getElementById('umidv').innerHTML = umidade;
+      }
+</script>
+</div>
+
+	<div class="alert alert-danger" role="alert" style="width:300px;margin-left:40%;margin-top:10px;">
+		<p class="text-center">Temperatura atual : <b id="temperature">0</b></p>
+	</div>
+	<div class="model">
+		<div class="modal-dialog" style="width:80%;height:auto">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Temperatura</h5>
+				</div>
+				<div class="model-body">
+					<div class="container" style="width:80%">
+						<canvas id="lineChart"></canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<!--
+	<div class="alert alert-danger" role="alert" style="width:300px;margin-left:40%;margin-top:10px;">
+		<p class="text-center">Umidade atual : <b id="umidade">0</b></p>
+	</div>
+ <div class="model">
+	<div class="modal-dialog" style="width:80%;height:auto">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Umidade</h5>
+			</div>
+			<div class="model-body">
+				<div class="container" style="width:80%">
+					<canvas id="lineChart2"></canvas>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+!-->
+
+</body>
+</html>
