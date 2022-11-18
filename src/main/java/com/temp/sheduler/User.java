@@ -49,15 +49,15 @@ public class User {
     public String latitude;
     public String longitude;
 
-    public String getTemperatura() {
+    public static String getTemperatura() {
         return temperatura;
     }
-
     public void setTemperatura(String temperatura) {
         this.temperatura = temperatura;
     }
 
-    public String temperatura;
+    public static String temperatura;
+
     public String umidade;
 
     public String getUmidade() {

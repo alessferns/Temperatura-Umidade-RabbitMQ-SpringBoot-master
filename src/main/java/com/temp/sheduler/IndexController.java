@@ -27,16 +27,28 @@ public class IndexController{
         return "index";
     }
 
-    @PostMapping("/")
+    @PostMapping("/dashboard")
     public String userRegistration(@ModelAttribute User user, Model model){
         System.out.println(user.toString());
         //validate
-        System.out.println(user.getId_drone());
-        System.out.println(user.getLatitude());
-        System.out.println(user.getLongitude());
-        System.out.println(user.getTemperatura());
-        System.out.println(user.getUmidade());
-        System.out.println(user.getMyCheckbox());
+        String drone;
+        drone=user.getId_drone();
+        String latitude;
+        latitude = user.getLatitude();
+        String longitude;
+        longitude = user.getLongitude();
+        String temperatura;
+        temperatura = user.getTemperatura();
+        String umidade;
+        umidade = user.getUmidade();
+        String rastreamento;
+        rastreamento = user.getMyCheckbox();
+        System.out.println(drone);
+        System.out.println(latitude);
+        System.out.println(longitude);
+        System.out.println(temperatura);
+        System.out.println(umidade);
+        System.out.println(rastreamento);
         return "home";
     }
 }

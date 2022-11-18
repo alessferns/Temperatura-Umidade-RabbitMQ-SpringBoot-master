@@ -19,8 +19,6 @@ import java.util.concurrent.ThreadLocalRandom;
 @EnableScheduling
 @Controller
 
-
-
 public class Schedular {
 
 	@Autowired
@@ -34,10 +32,13 @@ public class Schedular {
 
 	@Scheduled(cron ="0/10 * * * * ?")
 	void sendmessage() {
+
+		String temperatura;
+		temperatura = User.getTemperatura();
 		System.out.println("Rodando....");
 	    System.out.println("Enviando mensagem...");
 		int randomNum = ThreadLocalRandom.current().nextInt(0, 35 + 1);
-		amqpTemplate.convertAndSend(exchange, routingkey, randomNum );
-
+		amqpTemplate.convertAndSend(exchange, routingkey, temperatura);
 	}
+
 }
