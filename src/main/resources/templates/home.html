@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Home</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
-<script type="text/javascript">
+	<meta charset="ISO-8859-1">
+	<title>Home</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+	<script type="text/javascript">
 	var stompClient;
 	
 	/* Chart Configuration */
@@ -17,14 +17,22 @@
 		type : 'line',
 		data : {
 			labels : [],
-			datasets : [ {
-				label : 'Temperature',
+			datasets : [
+			{
+				label : 'Temperatura',
 				backgroudColor : 'rgb(255, 99, 132)',
 				borderColor : 'rgb(255, 99, 132)',
 				data : [],
 				fill : false
-
-			} ]
+			},
+			{
+			    label : 'Umidade',
+				backgroudColor : 'rgb(0,181,226)',
+				borderColor : 'rgb(0,181,226)',
+				data : [],
+				fill : false
+				}
+			]
 		},
 		options : {
 			responsive : true,
@@ -64,13 +72,13 @@
 			}
 		}
 	};
-	
+
 	/* Document Ready Event */
 	$(document).ready(function() {
-		
+
 		var ctx = document.getElementById('lineChart').getContext('2d');
 		window.myLine = new Chart(ctx, config);
-		
+
 		/* Configuring WebSocket on Client Side */
 		var socket = new SockJS('/live-temperature');
 		stompClient = Stomp.over(socket);
@@ -101,38 +109,39 @@
 </head>
 <body>
 <form action="/dashboard" method="post">
-<div class="inputs" role="alert" style="...">
-	<table class="tg" align="center">
-		<thead>
-		<tr align="center">
-			<th class="tg-thfk">id_drone</th>
-			<th class="tg-zv4m">Latitude</th>
-			<th class="tg-zv4m">Longitude</th>
-			<th class="tg-zv4m">Temperatura</th>
-			<th class="tg-zv4m">Umidade</th>
-			<th class="tg-zv4m">Rastreamento</th>
-		</tr>
-		</thead>
-		<tbody>
-		<tr align="center">
-			<td class="tg-zv4m"><input type="text" id="drone" name="id_drone" size="10" required></td>
-			<td class="tg-zv4m"><input type="number" id="lati" name="latitude" step="10" value="0" min="-90" max="90" required></td>
-			<td class="tg-zv4m"><input type="number" id="long" name="longitude" step="10" value="0" min="-180" max="180" required></td>
-			<td class="tg-zv4m"><input type="number" id="temp" name="temperatura" step="5" value="0" min="-25" max="40" required></td>
-			<td class="tg-zv4m"><input type="number" id="umid" name="umidade" step="10" value="0" min="0" max="100" required></td>
-			<td class="tg-zv4m"><label><input type="checkbox" name="myCheckbox"> Ativar</label></td>
-		</tr>
-		</tbody>
-	</table>
+	<div class="inputs" role="alert" style="...">
+		<table class="tg" align="center">
+			<thead>
+			<tr align="center">
+				<th class="tg-thfk">id_drone</th>
+				<th class="tg-zv4m">Latitude</th>
+				<th class="tg-zv4m">Longitude</th>
+				<th class="tg-zv4m">Temperatura</th>
+				<th class="tg-zv4m">Umidade</th>
+				<th class="tg-zv4m">Rastreamento</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr align="center">
+				<td class="tg-zv4m"><input type="text" id="drone" name="id_drone" size="10" required></td>
+				<td class="tg-zv4m"><input type="number" id="lati" name="latitude" step="10" value="0" min="-90" max="90" required></td>
+				<td class="tg-zv4m"><input type="number" id="long" name="longitude" step="10" value="0" min="-180" max="180" required></td>
+				<td class="tg-zv4m"><input type="number" id="temp" name="temperatura" step="5" value="0" min="-25" max="40" required></td>
+				<td class="tg-zv4m"><input type="number" id="umid" name="umidade" step="10" value="0" min="0" max="100" required></td>
+				<td class="tg-zv4m"><label><input type="checkbox" name="myCheckbox"> Ativar</label></td>
+			</tr>
+			</tbody>
+		</table>
 
-	<p id="dronev"></p>
-	<p id="lativ"></p>
-	<p id="longv"></p>
-	<p id="tempv"></p>
-	<p id="umidv"></p>
+		<p id="dronev"></p>
+		<p id="lativ"></p>
+		<p id="longv"></p>
+		<p id="tempv"></p>
+		<p id="umidv"></p>
 
-	<div class="botao" role="alert" style="..." align="center">
-	<button type="submit" onclick="enviar()" name="myButton" autofocus>Inserir dados</button>
+		<div class="botao" role="alert" style="..." align="center">
+			<button type="submit" onclick="enviar()" name="myButton" autofocus>Inserir dados</button>
+		</div>
 	</div>
 </form>
 <script>
@@ -149,25 +158,25 @@
       document.getElementById('umidv').innerHTML = umidade;
       }
 </script>
-</div>
 
-	<div class="alert alert-danger" role="alert" style="width:300px;margin-left:40%;margin-top:10px;">
-		<p class="text-center">Temperatura atual : <b id="temperature">0</b></p>
-	</div>
-	<div class="model">
-		<div class="modal-dialog" style="width:80%;height:auto">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title">Temperatura</h5>
-				</div>
-				<div class="model-body">
-					<div class="container" style="width:80%">
-						<canvas id="lineChart"></canvas>
-					</div>
+
+<div class="alert alert-danger" role="alert" style="width:300px;margin-left:40%;margin-top:10px;">
+	<p class="text-center">Temperatura atual : <b id="temperature">0</b></p>
+</div>
+<div class="model">
+	<div class="modal-dialog" style="width:80%;height:auto">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Temperatura vs Umidade</h5>
+			</div>
+			<div class="model-body">
+				<div class="container" style="width:80%">
+					<canvas id="lineChart"></canvas>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
 
 <!--
 	<div class="alert alert-danger" role="alert" style="width:300px;margin-left:40%;margin-top:10px;">
