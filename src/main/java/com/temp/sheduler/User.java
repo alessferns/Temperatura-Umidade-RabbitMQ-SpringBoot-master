@@ -47,6 +47,7 @@ public class User {
     }
 
     public String latitude;
+
     public String longitude;
 
     public static String getTemperatura() {
@@ -55,15 +56,12 @@ public class User {
     public void setTemperatura(String temperatura) {
         this.temperatura = temperatura;
     }
-
     public static String temperatura;
 
-    public String umidade;
-
-    public String getUmidade() {
+    public static String umidade;
+    public static String getUmidade() {
         return umidade;
     }
-
     public void setUmidade(String umidade) {
         this.umidade = umidade;
     }
@@ -78,3 +76,4 @@ public class User {
 
     public String myCheckbox;
 }
+
