@@ -35,10 +35,12 @@ public class Schedular {
 
 		String temperatura;
 		temperatura = User.getTemperatura();
+		String umidade;
+		umidade = User.getUmidade();
 		System.out.println("Rodando....");
 	    System.out.println("Enviando mensagem...");
 		int randomNum = ThreadLocalRandom.current().nextInt(0, 35 + 1);
 		amqpTemplate.convertAndSend(exchange, routingkey, temperatura);
+		//amqpTemplate.convertAndSend(exchange, routingkey, umidade);
 	}
-
 }
