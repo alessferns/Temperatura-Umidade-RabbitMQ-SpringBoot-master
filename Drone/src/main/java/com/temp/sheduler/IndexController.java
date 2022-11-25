@@ -53,6 +53,9 @@ public class IndexController{
         System.out.println(temperatura);
         System.out.println(umidade);
         System.out.println(rastreamento);
+        if (user.myCheckbox == null){
+            user.myCheckbox = "off";
+        }
         rabbitTemplate.convertAndSend("drone.ex","", user);
         System.out.println("Mandou");
         return "home";

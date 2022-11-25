@@ -9,6 +9,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
@@ -22,15 +24,17 @@ public class RabbitmqReceiver {
 
 	@Autowired
 	private RabbitTemplate rabbitTemplate;
+	public String encontrou = "N";
 
-	Set<User> users =  new LinkedHashSet<User>();
+	ArrayList<UserDados> listaDrones =  new ArrayList<UserDados>();
+
 
 
 
 
 	@RabbitListener(queues = "drone")
 	public void recebeMensagem(@Payload User user) {
-		String mensagem = """
+	/*	String mensagem = """
                 ID Drone: %s
                 Umidade: %s
                 Temperatura: %s
@@ -38,12 +42,63 @@ public class RabbitmqReceiver {
 				user.getUmidade(),
 				user.getTemperatura());
 
-		System.out.println("Recebi a mensagem " + mensagem);
+		System.out.println("Recebi a mensagem " + mensagem);*/
+
+		UserDados drone = new UserDados();
+		if ((user.umidade <= 15) || (user.temperatura>=35 || user.temperatura<=0)){
+			drone.id_drone= user.id_drone;
+			drone.addLatitude(user.latitude);
+			drone.addLongitude(user.longitude);
+			drone.addTemperatura(user.temperatura);
+			drone.addUmidade(user.umidade);
+			drone.setMyCheckbox(user.myCheckbox);
+			drone.setEnviaEmail("S");
+
+		}else{
+			drone.id_drone= user.id_drone;
+			drone.addLatitude(user.latitude);
+			drone.addLongitude(user.longitude);
+			drone.addTemperatura(user.temperatura);
+			drone.addUmidade(user.umidade);
+			drone.setMyCheckbox(user.myCheckbox);
+			drone.setEnviaEmail("N");
+		}
+
+		if (listaDrones.size() == 0){
+			listaDrones.add(drone);
+		}else{
+			encontrou = "N";
+			listaDrones.forEach(elemento ->{
+				if(elemento.id_drone == drone.id_drone){
+					elemento.addUmidade(user.umidade);
+					elemento.addTemperatura(user.temperatura);
+					elemento.addLongitude(user.longitude);
+					elemento.addLatitude(user.latitude);
+					elemento.myCheckbox = user.myCheckbox;
+					if (drone.enviaEmail.equals("S")){
+						elemento.enviaEmail ="S";
+					}
+					encontrou = "S";
+				}
+			});
+			if (encontrou.equals("N")){
+				listaDrones.add(drone);
+			}
+
+
+
+		}
 	}
 
-	@Scheduled(cron ="0/10 * * * * ?")
+	@Scheduled(cron ="0/60 * * * * ?")
 	public void mandamsg(){
-		System.out.println("Passou 10 segundos ");
+		System.out.println("Passou 60 segundos ");
+		listaDrones.forEach(elemento ->{
+			if(elemento.enviaEmail.equals("S")){
+				elemento.imprime();
+			}
+		});
+		listaDrones.clear();
 	}
 
 }

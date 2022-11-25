@@ -25,27 +25,57 @@ public class Schedular {
 	@Autowired
 	private RabbitTemplate rabbitTemplate;
 
-	User user =  new User();
+	User user1 =  new User();
+	User user2 =  new User();
+	User user3 =  new User();
 
 	@Scheduled(cron ="0/10 * * * * ?")
 	void sendmessage() {
 
-		int id_drone = ThreadLocalRandom.current().nextInt(0, 5);;
-		int latitude = ThreadLocalRandom.current().nextInt(0, 10001);
+		//int id_drone = ThreadLocalRandom.current().nextInt(0, 5);;
+		/*int latitude = ThreadLocalRandom.current().nextInt(0, 10001);
 		int longitude = ThreadLocalRandom.current().nextInt(0, 10001);
 		int umidade = ThreadLocalRandom.current().nextInt(0, 101);
 		int temperatura= ThreadLocalRandom.current().nextInt(0, 66) - 25;
+
+
+		user1.setId_drone(1);
+		user1.setLatitude(latitude);
+		user1.setLongitude(longitude);
+		user1.setUmidade(umidade);
+		user1.setTemperatura(temperatura);
+		user1.setMyCheckbox("on");
+
+		latitude = ThreadLocalRandom.current().nextInt(0, 10001);
+		longitude = ThreadLocalRandom.current().nextInt(0, 10001);
+		umidade = ThreadLocalRandom.current().nextInt(0, 101);
+		temperatura= ThreadLocalRandom.current().nextInt(0, 66) - 25;
+
+		user2.setId_drone(2);
+		user2.setLatitude(latitude);
+		user2.setLongitude(longitude);
+		user2.setUmidade(umidade);
+		user2.setTemperatura(temperatura);
+		user2.setMyCheckbox("on");
+
+		latitude = ThreadLocalRandom.current().nextInt(0, 10001);
+		longitude = ThreadLocalRandom.current().nextInt(0, 10001);
+		umidade = ThreadLocalRandom.current().nextInt(0, 101);
+		temperatura= ThreadLocalRandom.current().nextInt(0, 66) - 25;
+
+		user3.setId_drone(3);
+		user3.setLatitude(latitude);
+		user3.setLongitude(longitude);
+		user3.setUmidade(umidade);
+		user3.setTemperatura(temperatura);
+		user3.setMyCheckbox("off");
+
 		System.out.println("Rodando....");
-	    System.out.println("Enviando mensagem...");
+		System.out.println("Enviando mensagem...");
 
-		user.setId_drone(id_drone);
-		user.setLatitude(latitude);
-		user.setLongitude(longitude);
-		user.setUmidade(umidade);
-		user.setTemperatura(temperatura);
-		user.setMyCheckbox("on");
-
-		rabbitTemplate.convertAndSend("drone.ex","", user);
+		rabbitTemplate.convertAndSend("drone.ex","", user1);
+		rabbitTemplate.convertAndSend("drone.ex","", user2);
+		rabbitTemplate.convertAndSend("drone.ex","", user3);*/
 	}
 
 }
