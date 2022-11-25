@@ -33,7 +33,7 @@ public class Schedular {
 	void sendmessage() {
 
 		//int id_drone = ThreadLocalRandom.current().nextInt(0, 5);;
-		/*int latitude = ThreadLocalRandom.current().nextInt(0, 10001);
+		int latitude = ThreadLocalRandom.current().nextInt(0, 10001);
 		int longitude = ThreadLocalRandom.current().nextInt(0, 10001);
 		int umidade = ThreadLocalRandom.current().nextInt(0, 101);
 		int temperatura= ThreadLocalRandom.current().nextInt(0, 66) - 25;
@@ -75,7 +75,7 @@ public class Schedular {
 
 		rabbitTemplate.convertAndSend("drone.ex","", user1);
 		rabbitTemplate.convertAndSend("drone.ex","", user2);
-		rabbitTemplate.convertAndSend("drone.ex","", user3);*/
+		rabbitTemplate.convertAndSend("drone.ex","", user3);
 	}
 
 }
