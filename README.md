@@ -8,9 +8,11 @@ Após a instalação, é possível acessá-lo pelo link: http://localhost:15672/
 
 Preferencialmente, utilize o IntelliJ IDEA para executar o projeto. 
 
-Execute o src/main/java/com/temp/rabbitmq/RabbitmqApplication.java
+Para gerar as mensagens, execute o RabbitmqApplication.java da pasta DRONE. 
 
 Para acessar a dashboard, entre no link: http://localhost:9001/dashboard
+
+Para ler as mensagens, execute o RabbitmqApplication.java da pasta CONSUMIDOR. 
 
 Essa será a aparência da página:
 
@@ -31,4 +33,6 @@ Valores que não estão dentro dos intervalos não serão permitidos:
 Exemplo - Tentativa de inserir manualmente uma temperatura >=40 graus
 ![image](https://user-images.githubusercontent.com/100177921/204109229-8018b76c-1619-4aa8-85a3-f3cd5e3be645.png)
 
+Em caso de dúvidas, fineza, entrar em contato. 
+alessferns@gmail.com
 
