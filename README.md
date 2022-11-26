@@ -41,6 +41,19 @@ Valores que não estão dentro dos intervalos não serão permitidos:
 Exemplo - Tentativa de inserir manualmente uma temperatura >=40 graus
 ![image](https://user-images.githubusercontent.com/100177921/204109229-8018b76c-1619-4aa8-85a3-f3cd5e3be645.png)
 
+
+Exemplo - Inserção de dados:
+
+![image](https://user-images.githubusercontent.com/100177921/204111522-010a8fb2-eef0-4ed0-b6c0-f6942834276d.png)
+
+Envio de mensagens a cada 10 segundos:
+
+![image](https://user-images.githubusercontent.com/100177921/204111542-03db32c7-405a-41c7-af19-f84208363d74.png)
+
+Após 1 minuto, temos o alerta do drone 5:
+
+![image](https://user-images.githubusercontent.com/100177921/204111555-e4d0aee1-e300-411c-bd45-ae5d7a931329.png)
+
 Em caso de dúvidas, fineza, entrar em contato. 
 alessferns@gmail.com
 
