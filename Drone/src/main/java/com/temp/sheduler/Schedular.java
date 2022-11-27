@@ -33,8 +33,8 @@ public class Schedular {
 	void sendmessage() {
 
 		//int id_drone = ThreadLocalRandom.current().nextInt(0, 5);;
-		int latitude = ThreadLocalRandom.current().nextInt(0, 10001);
-		int longitude = ThreadLocalRandom.current().nextInt(0, 10001);
+		int latitude = ThreadLocalRandom.current().nextInt(0, 181) -90;
+		int longitude = ThreadLocalRandom.current().nextInt(0, 361) -180;
 		int umidade = ThreadLocalRandom.current().nextInt(0, 101);
 		int temperatura= ThreadLocalRandom.current().nextInt(0, 66) - 25;
 
@@ -46,8 +46,8 @@ public class Schedular {
 		user1.setTemperatura(temperatura);
 		user1.setMyCheckbox("on");
 
-		latitude = ThreadLocalRandom.current().nextInt(0, 10001);
-		longitude = ThreadLocalRandom.current().nextInt(0, 10001);
+		latitude = ThreadLocalRandom.current().nextInt(0, 181) -90;
+		longitude = ThreadLocalRandom.current().nextInt(0, 361) -180;
 		umidade = ThreadLocalRandom.current().nextInt(0, 101);
 		temperatura= ThreadLocalRandom.current().nextInt(0, 66) - 25;
 
@@ -58,8 +58,8 @@ public class Schedular {
 		user2.setTemperatura(temperatura);
 		user2.setMyCheckbox("on");
 
-		latitude = ThreadLocalRandom.current().nextInt(0, 10001);
-		longitude = ThreadLocalRandom.current().nextInt(0, 10001);
+		latitude = ThreadLocalRandom.current().nextInt(0, 181) -90;
+		longitude = ThreadLocalRandom.current().nextInt(0, 361) -180;
 		umidade = ThreadLocalRandom.current().nextInt(0, 101);
 		temperatura= ThreadLocalRandom.current().nextInt(0, 66) - 25;
 
