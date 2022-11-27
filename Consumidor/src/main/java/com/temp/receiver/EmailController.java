@@ -28,8 +28,8 @@ public class EmailController {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setSubject("ALERTA DRONE");
         message.setText(this.texto);
-        message.setTo("droneidt@outlook.com");
-        message.setFrom("droneidt@outlook.com");
+        message.setTo("xxxxx@algumemail.com");
+        message.setFrom("xxxxx@algumemail.com");
 
         try {
             mailSender.send(message);
