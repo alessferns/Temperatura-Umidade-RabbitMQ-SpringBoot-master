@@ -70,6 +70,8 @@ Aqui temos o email recebido:
 
 ![image](https://user-images.githubusercontent.com/100177921/204116430-10c99d51-8ccc-4865-967d-e37f9f74e8b8.png)
 
+Obs: Os testes foram feitos com emails do outlook. 
+
 Os drones 1, 2 e 3 são aleatórios, com finalidade de cumprir o requisito de vários drones mandando mensagens. 
 
 O drone 5 foi exatamente o que foi colocado nos inputs, gerando um alerta e enviando os inputs por email. 
