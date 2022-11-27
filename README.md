@@ -54,6 +54,18 @@ Após 1 minuto, temos o alerta do drone 5:
 
 ![image](https://user-images.githubusercontent.com/100177921/204111555-e4d0aee1-e300-411c-bd45-ae5d7a931329.png)
 
+Para receber o alerta via email, você deverá preencher o application.properties da pasta CONSUMIDOR com email e senha:
+
+![image](https://user-images.githubusercontent.com/100177921/204114847-251d6b86-393a-44fe-ab59-e12f34c55281.png)
+
+Aqui temos o email recebido:
+
+![image](https://user-images.githubusercontent.com/100177921/204115021-e78d76b5-549a-416a-84ef-cf47bb6fa0cc.png)
+
+Os drones 1, 2 e 3 são aleatórios, com finalidade de cumprir um requisito de vários drones mandando mensagens. 
+
+O drone 5 foi exatamente o que foi colocado nos inputs, gerando um alerta e enviando os inputs por email. 
+
 Em caso de dúvidas, fineza, entrar em contato. 
 alessferns@gmail.com
 
