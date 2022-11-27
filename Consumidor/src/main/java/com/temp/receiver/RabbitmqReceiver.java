@@ -3,11 +3,13 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
+import org.springframework.context.ApplicationContext;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -24,25 +26,16 @@ public class RabbitmqReceiver {
 
 	@Autowired
 	private RabbitTemplate rabbitTemplate;
+
+	@Autowired
+	EmailController email;
 	public String encontrou = "N";
 
 	ArrayList<UserDados> listaDrones =  new ArrayList<UserDados>();
 
 
-
-
-
 	@RabbitListener(queues = "drone")
 	public void recebeMensagem(@Payload User user) {
-	/*	String mensagem = """
-                ID Drone: %s
-                Umidade: %s
-                Temperatura: %s
-                """.formatted(user.getId_drone(),
-				user.getUmidade(),
-				user.getTemperatura());
-
-		System.out.println("Recebi a mensagem " + mensagem);*/
 
 		UserDados drone = new UserDados();
 		if ((user.umidade <= 15) || (user.temperatura>=35 || user.temperatura<=0)){
@@ -92,12 +85,24 @@ public class RabbitmqReceiver {
 
 	@Scheduled(cron ="0/60 * * * * ?")
 	public void mandamsg(){
+
+		String mensagem ="";
 		System.out.println("Passou 60 segundos ");
-		listaDrones.forEach(elemento ->{
+		for(UserDados elemento : this.listaDrones){
 			if(elemento.enviaEmail.equals("S")){
-				elemento.imprime();
+
+				//System.out.println(elemento.texto());
+				mensagem = mensagem + elemento.texto();
+
+				//elemento.imprime();
 			}
-		});
+
+		}
+		if (!(mensagem.isEmpty() || mensagem.isBlank())){
+			email.setTexto(mensagem);
+			email.sendMail();
+
+		}
 		listaDrones.clear();
 	}
 
