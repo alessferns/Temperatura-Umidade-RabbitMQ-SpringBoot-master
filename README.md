@@ -58,13 +58,23 @@ Para receber o alerta via email, você deverá preencher o application.propertie
 
 ![image](https://user-images.githubusercontent.com/100177921/204114847-251d6b86-393a-44fe-ab59-e12f34c55281.png)
 
+Também será preciso alterar o email no EmailConfig.java:
+
+![image](https://user-images.githubusercontent.com/100177921/204116066-cd1b6e60-2b62-4c45-81e8-c0cd0f9bba53.png)
+
+No EmailController é possível mudar o destinatário:
+
+![image](https://user-images.githubusercontent.com/100177921/204116105-c6c888e9-1c80-446a-85de-8dc279315cc2.png)
+
 Aqui temos o email recebido:
 
 ![image](https://user-images.githubusercontent.com/100177921/204115021-e78d76b5-549a-416a-84ef-cf47bb6fa0cc.png)
 
-Os drones 1, 2 e 3 são aleatórios, com finalidade de cumprir um requisito de vários drones mandando mensagens. 
+Os drones 1, 2 e 3 são aleatórios, com finalidade de cumprir o requisito de vários drones mandando mensagens. 
 
 O drone 5 foi exatamente o que foi colocado nos inputs, gerando um alerta e enviando os inputs por email. 
+
+Não há uma ordem para o id_drone (não é preciso incluir o drone 4 após o 3, tanto faz. Por isso o exemplo foi com o drone 5). 
 
 Em caso de dúvidas, fineza, entrar em contato. 
 alessferns@gmail.com
