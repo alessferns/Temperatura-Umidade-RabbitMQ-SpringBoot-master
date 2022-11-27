@@ -151,4 +151,25 @@ public class UserDados implements Serializable {
         System.out.println("----------------------------------------------");
     }
 
+    public String texto(){
+
+        String mensagem = """
+                ----------------------------------------------
+                Alerta do drone  %S
+                
+                Umidades: %S
+                Temperaturas: %S
+                Latitudes: %S
+                Longitudes: %S
+                Ativar Rastreiamento: %S
+                """.formatted(this.id_drone,
+                        this.umidade,
+                this.temperatura,
+                this.latitude,
+                this.longitude,
+                this.myCheckbox);
+        return mensagem;
+
+    }
+
 }
