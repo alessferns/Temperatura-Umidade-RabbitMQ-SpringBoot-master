@@ -32,7 +32,7 @@ Temos os seguintes inputs:
 
 id_drone (Identificador do Drone); Latitude (-90º até +90º); Longitude (-180º até +180º); Temperatura (-25º até 40º); Umidade (0% - 100%); Ativar rastreamento (ligada-desligada).
 
-Há verificações se os inputs estão inseridos corretamente, conforme abaixo:
+Há verificações se os inputs estão preenchidos corretamente, conforme abaixo:
 
 ![image](https://user-images.githubusercontent.com/100177921/204109196-421bc05b-20f6-45a3-8360-68987a835032.png)
 
@@ -64,11 +64,11 @@ Também será preciso alterar o email no EmailConfig.java:
 
 No EmailController é possível mudar o destinatário:
 
-![image](https://user-images.githubusercontent.com/100177921/204116105-c6c888e9-1c80-446a-85de-8dc279315cc2.png)
+![image](https://user-images.githubusercontent.com/100177921/204116513-be55b5c9-50f8-46c4-877c-7fce83a3589c.png)
 
 Aqui temos o email recebido:
 
-![image](https://user-images.githubusercontent.com/100177921/204115021-e78d76b5-549a-416a-84ef-cf47bb6fa0cc.png)
+![image](https://user-images.githubusercontent.com/100177921/204116430-10c99d51-8ccc-4865-967d-e37f9f74e8b8.png)
 
 Os drones 1, 2 e 3 são aleatórios, com finalidade de cumprir o requisito de vários drones mandando mensagens. 
 
