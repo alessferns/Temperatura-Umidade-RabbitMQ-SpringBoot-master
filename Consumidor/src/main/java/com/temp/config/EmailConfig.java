@@ -16,8 +16,8 @@ public class EmailConfig
         ((JavaMailSenderImpl) mailSender).setHost("smtp.office365.com");
         ((JavaMailSenderImpl) mailSender).setPort(587);
 
-        ((JavaMailSenderImpl) mailSender).setUsername("droneidt@outlook.com");
-        ((JavaMailSenderImpl) mailSender).setPassword("Trabalhofinal");
+        ((JavaMailSenderImpl) mailSender).setUsername("xxxxx@algumemail.com");
+        ((JavaMailSenderImpl) mailSender).setPassword("senhadoemail");
 
         Properties props = ((JavaMailSenderImpl) mailSender).getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");
